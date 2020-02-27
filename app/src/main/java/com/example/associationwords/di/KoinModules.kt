@@ -8,6 +8,6 @@ var viewModels = module {
     viewModel{SharedViewModel()}
 }
 
-val bindingsElementModule = module {
+val repositorySingleton = module {
 
 }

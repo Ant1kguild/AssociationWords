@@ -1,5 +1,6 @@
 package com.example.needmoreassociations.data
 
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 interface WordsRepository {
@@ -18,6 +19,13 @@ interface WordsRepository {
 }
 
 class WordsRepositoryImpl : WordsRepository{
+
+    companion object {
+        private const val WORDS = "words"
+    }
+
+    private val userCollectionRef = FirebaseFirestore.getInstance().collection(WORDS)
+
     override suspend fun getWords(): Map<String, List<String>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

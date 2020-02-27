@@ -2,59 +2,39 @@ package com.example.associationwords.ui
 
 import android.os.Bundle
 import android.view.Menu
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.databinding.DataBindingUtil
 import com.example.associationwords.R
 import com.example.associationwords.databinding.ActivityStartBinding
+import com.example.associationwords.databinding.AppBarMainBinding
 import com.example.associationwords.databinding.NavViewHeaderMainBinding
-import com.example.associationwords.model.User
 
 class StartActivity : AppCompatActivity() {
 
-    private lateinit var navViewHeaderMain : NavViewHeaderMainBinding
-    private lateinit var binding : ActivityStartBinding
+    companion object {
+        private const val TAG = "StartActivity"
+    }
+
+    //DataBinding
+    private lateinit var navViewHeaderMain: NavViewHeaderMainBinding
+    private lateinit var appBarMainBinding: AppBarMainBinding
+    private lateinit var binding: ActivityStartBinding
+
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,
-            R.layout.activity_start
-        )
-
-
-
-        val viewHeader = binding.navView.getHeaderView(0)
-        navViewHeaderMain = NavViewHeaderMainBinding.bind(viewHeader)
-        navViewHeaderMain.user = User("test", "Test name Andrey", "mymail@com.gmail", "photo")
-
-
-
-
-
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-
-
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.nav_view)
-        val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.nav_home,
-            R.id.nav_gallery,
-            R.id.nav_slideshow
-        ), drawerLayout)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_start)
+        setupToolbar()
+        setupNavigationViewHeader()
+        setupNavigationView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -66,5 +46,32 @@ class StartActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    private fun setupToolbar() {
+        DataBindingUtil.getBinding<AppBarMainBinding>(binding.drawerLayout.getChildAt(0)).let {
+            appBarMainBinding = it!!
+            toolbar = it.toolbarStartActivity
+            setSupportActionBar(toolbar)
+        }
+    }
+
+    private fun setupNavigationViewHeader() {
+        val viewHeader = binding.navView.getHeaderView(0)
+        navViewHeaderMain = NavViewHeaderMainBinding.bind(viewHeader)
+    }
+
+    private fun setupNavigationView() {
+        val navController = findNavController(R.id.nav_host_fragment)
+        val setNavFragments =
+            setOf(
+                R.id.nav_home,
+                R.id.nav_gallery,
+                R.id.nav_slideshow,
+                R.id.nav_settings
+            )
+        appBarConfiguration = AppBarConfiguration(setNavFragments, binding.drawerLayout)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        binding.navView.setupWithNavController(navController)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.associationwords.utils
+package com.example.associationwords.model
 
 sealed class Result<out R> {
     data class Success<out T>(val data: T) : Result<T>()

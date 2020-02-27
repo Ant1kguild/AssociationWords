@@ -8,6 +8,7 @@ import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -17,16 +18,16 @@ import com.example.associationwords.R
 import com.example.associationwords.databinding.ActivityStartBinding
 import com.example.associationwords.databinding.AppBarMainBinding
 import com.example.associationwords.databinding.NavViewHeaderMainBinding
+import com.example.associationwords.utils.CoilUtils.loadImageCoil
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StartActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "StartActivity"
-        private const val RC_SIGIN = 28100210
+        private const val RC_SIGIN = 21087
     }
 
     //ViewModel
@@ -42,11 +43,19 @@ class StartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //checkCurrentUser()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_start)
         setupToolbar()
         setupNavigationViewHeader()
         setupNavigationView()
+
+        sharedViewModel.user.observe(this, Observer {
+            navViewHeaderMain.tvUserNameNvh.text = it.name
+            navViewHeaderMain
+                .ivUserImageNvh
+                .loadImageCoil(it.photoUrl)
+
+        })
+        checkCurrentUser()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -92,7 +101,7 @@ class StartActivity : AppCompatActivity() {
         if (user == null) {
             sigIn()
         } else {
-            sharedViewModel.setFirebaseUser(user)
+            sharedViewModel.checkOrAddUserInFirebase(user)
         }
     }
 
@@ -117,7 +126,7 @@ class StartActivity : AppCompatActivity() {
         when (requestCode) {
             RC_SIGIN -> {
                 if (resultCode == Activity.RESULT_OK) {
-                   sharedViewModel.setFirebaseUser(FirebaseAuth.getInstance().currentUser!!)
+                   sharedViewModel.checkOrAddUserInFirebase(FirebaseAuth.getInstance().currentUser!!)
                 } else {
                     Log.e(TAG, "BAD BAD BAD")
                 }

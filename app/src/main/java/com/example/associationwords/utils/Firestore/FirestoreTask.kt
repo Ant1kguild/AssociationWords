@@ -1,6 +1,6 @@
 package com.example.associationwords.utils.Firestore
 
-import com.example.associationwords.utils.Result
+import com.example.associationwords.model.Result
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.suspendCancellableCoroutine

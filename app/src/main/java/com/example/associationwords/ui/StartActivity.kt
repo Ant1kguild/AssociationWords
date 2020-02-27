@@ -1,6 +1,9 @@
 package com.example.associationwords.ui
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -14,13 +17,20 @@ import com.example.associationwords.R
 import com.example.associationwords.databinding.ActivityStartBinding
 import com.example.associationwords.databinding.AppBarMainBinding
 import com.example.associationwords.databinding.NavViewHeaderMainBinding
+import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StartActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "StartActivity"
+        private const val RC_SIGIN = 28100210
     }
+
+    //ViewModel
+    private val sharedViewModel by viewModel<SharedViewModel>()
 
     //DataBinding
     private lateinit var navViewHeaderMain: NavViewHeaderMainBinding
@@ -32,6 +42,7 @@ class StartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //checkCurrentUser()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_start)
         setupToolbar()
         setupNavigationViewHeader()
@@ -80,6 +91,37 @@ class StartActivity : AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser
         if (user == null) {
             sigIn()
+        } else {
+            sharedViewModel.setFirebaseUser(user)
+        }
+    }
+
+    private fun sigIn() {
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.EmailBuilder().build(),
+            AuthUI.IdpConfig.GoogleBuilder().build()
+        )
+
+        startActivityForResult(
+            AuthUI.getInstance()
+                .createSignInIntentBuilder()
+                .setAvailableProviders(providers)
+                .build(),
+            RC_SIGIN
+        )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when (requestCode) {
+            RC_SIGIN -> {
+                if (resultCode == Activity.RESULT_OK) {
+                   sharedViewModel.setFirebaseUser(FirebaseAuth.getInstance().currentUser!!)
+                } else {
+                    Log.e(TAG, "BAD BAD BAD")
+                }
+            }
         }
     }
 }

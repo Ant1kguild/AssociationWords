@@ -10,6 +10,6 @@ data class User(
 enum class UserValue(val value: String) {
     UUID("uuid"),
     NAME("name"),
-    MAil("mail"),
+    MAIL("mail"),
     PHOTO_URL("photoUrl")
 }

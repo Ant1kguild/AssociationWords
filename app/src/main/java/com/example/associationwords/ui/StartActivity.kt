@@ -14,6 +14,7 @@ import com.example.associationwords.R
 import com.example.associationwords.databinding.ActivityStartBinding
 import com.example.associationwords.databinding.AppBarMainBinding
 import com.example.associationwords.databinding.NavViewHeaderMainBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class StartActivity : AppCompatActivity() {
 
@@ -73,5 +74,12 @@ class StartActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(setNavFragments, binding.drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
+    }
+
+    private fun checkCurrentUser() {
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user == null) {
+            sigIn()
+        }
     }
 }

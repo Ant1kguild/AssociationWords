@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-interface UserRepository {
+interface UserFirestoreRepo {
 
     suspend fun getUserFromFirestore(userId: String): Result<User>
 
@@ -23,10 +23,10 @@ interface UserRepository {
 
 }
 
-class UserRepositoryImpl : UserRepository {
+class UserFirestoreRepoRepoImpl : UserFirestoreRepo {
 
     companion object {
-        private const val TAG = "UserRepositoryImpl"
+        private const val TAG = "UserFirestoreRepoRepoImpl"
         private const val USER = "users"
     }
 

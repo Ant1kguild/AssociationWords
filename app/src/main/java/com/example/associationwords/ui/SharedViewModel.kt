@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.associationwords.model.Result
 import com.example.associationwords.model.User
-import com.example.needmoreassociations.data.UserRepository
+import com.example.needmoreassociations.data.UserFirestoreRepo
 import com.example.needmoreassociations.data.WordsRepository
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.CoroutineScope
@@ -19,7 +19,7 @@ import okhttp3.Response
 
 
 class SharedViewModel(
-    private val userRepository: UserRepository,
+    private val userFirestoreRepo: UserFirestoreRepo,
     private val wordsRepository: WordsRepository
 ) :
     ViewModel() {
@@ -41,7 +41,7 @@ class SharedViewModel(
 
     fun checkOrAddUserInFirebase(user: FirebaseUser) {
         CoroutineScope(Dispatchers.IO).launch {
-            when (val result = userRepository.checkUserInFirestore(user)) {
+            when (val result = userFirestoreRepo.checkUserInFirestore(user)) {
                 is Result.Success -> {
                     val newUser = User(
                         user.uid,
@@ -51,7 +51,7 @@ class SharedViewModel(
                     )
 
                     if (!result.data) {
-                        userRepository.createUserInFirestore(newUser)
+                        userFirestoreRepo.createUserInFirestore(newUser)
                         Log.i(TAG, "User exist: ${result.data}")
                     } else {
                         Log.i(TAG, "User exist: ${result.data}")
@@ -69,13 +69,17 @@ class SharedViewModel(
     val someTestFun  = liveData(Dispatchers.IO) {
         val client = OkHttpClient()
         val request: Request = Request.Builder()
-            .url("https://wordsapiv1.p.rapidapi.com/words/%7Bword%7D/examples")
+            .url("https://wordsapiv1.p.rapidapi.com/words/example")
             .get()
             .addHeader("x-rapidapi-host", "wordsapiv1.p.rapidapi.com")
             .addHeader("x-rapidapi-key", "0e7c75cf74msh6000360a7d46376p1f5eabjsnfa5d1835e92d")
             .build()
+
         val response: Response = client.newCall(request).execute()
-        Log.i(TAG, request.toString())
+
+
+
+        Log.i(TAG, response.toString())
 
 
 

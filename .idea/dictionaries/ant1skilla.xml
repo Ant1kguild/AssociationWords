@@ -2,8 +2,10 @@
   <dictionary name="ant1skilla">
     <words>
       <w>associationwords</w>
+      <w>coroutines</w>
       <w>firestore</w>
       <w>koin</w>
+      <w>moshi</w>
     </words>
   </dictionary>
 </component>

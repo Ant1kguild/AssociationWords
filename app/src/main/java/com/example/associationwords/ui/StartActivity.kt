@@ -56,6 +56,9 @@ class StartActivity : AppCompatActivity() {
 
         })
         checkCurrentUser()
+        sharedViewModel.someTestFun.observe(this, Observer {
+            //TODO
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

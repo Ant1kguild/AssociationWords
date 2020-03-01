@@ -1,9 +1,9 @@
-package com.example.needmoreassociations.data
+package com.example.associationwords.data
 
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-interface WordsRepository {
+interface WordsFirestoreRepo {
 
     suspend fun getWords(): Map<String, List<String>>
 
@@ -18,7 +18,7 @@ interface WordsRepository {
     suspend fun  deleteAssociations(word: String, association: String)
 }
 
-class WordsRepositoryImpl : WordsRepository{
+class WordsFirestoreRepoImpl : WordsFirestoreRepo {
 
     companion object {
         private const val WORDS = "words"

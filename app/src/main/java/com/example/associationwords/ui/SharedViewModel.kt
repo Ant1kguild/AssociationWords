@@ -5,10 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.example.associationwords.data.WordsApiRepo
 import com.example.associationwords.model.Result
 import com.example.associationwords.model.User
 import com.example.needmoreassociations.data.UserFirestoreRepo
-import com.example.needmoreassociations.data.WordsRepository
+import com.example.associationwords.data.WordsFirestoreRepo
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +21,8 @@ import okhttp3.Response
 
 class SharedViewModel(
     private val userFirestoreRepo: UserFirestoreRepo,
-    private val wordsRepository: WordsRepository
+    private val wordsFirestoreRepo: WordsFirestoreRepo,
+    private val wordsApiRepo: WordsApiRepo
 ) :
     ViewModel() {
 
@@ -66,7 +68,7 @@ class SharedViewModel(
         }
     }
 
-    val someTestFun  = liveData(Dispatchers.IO) {
+    val someTestFun = liveData(Dispatchers.IO) {
         val client = OkHttpClient()
         val request: Request = Request.Builder()
             .url("https://wordsapiv1.p.rapidapi.com/words/example")
@@ -76,10 +78,17 @@ class SharedViewModel(
             .build()
 
         val response: Response = client.newCall(request).execute()
-
-
-
         Log.i(TAG, response.toString())
+
+
+        when (val temp = wordsApiRepo.getWordExample("example")) {
+            is Result.Success -> Log.i(TAG, temp.data.examples.toString())
+            is Result.Error -> Log.i(TAG, temp.exception.toString())
+            is Result.Canceled -> Log.i(TAG, temp.exception.toString())
+        }
+
+
+
 
 
 

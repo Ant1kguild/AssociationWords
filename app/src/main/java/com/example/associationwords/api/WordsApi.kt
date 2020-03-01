@@ -1,5 +1,6 @@
 package com.example.associationwords.api
 
+import com.example.associationwords.model.Result
 import com.example.associationwords.api.response.WordExample
 import com.example.associationwords.api.response.WordInfo
 import retrofit2.http.GET

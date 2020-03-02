@@ -5,7 +5,6 @@ import com.example.associationwords.BuildConfig
 
 object ApiConstants  {
 
-
     const val WORDS_BASE_URL = "https://wordsapiv1.p.rapidapi.com/words/"
     const val WORDS_HEADER_HOST_NAME = "x-rapidapi-host"
     const val WORDS_HEADER_HOST_VALUE = "wordsapiv1.p.rapidapi.com"

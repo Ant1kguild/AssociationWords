@@ -12,7 +12,6 @@ import org.koin.core.context.startKoin
 
 
 class App: Application() {
-    var res : Resources? = null
     override fun onCreate() {
         super.onCreate()
         startKoin {

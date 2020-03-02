@@ -10,6 +10,7 @@ import com.example.needmoreassociations.data.UserFirestoreRepo
 import com.example.needmoreassociations.data.UserFirestoreRepoRepoImpl
 import com.example.associationwords.data.WordsFirestoreRepo
 import com.example.associationwords.data.WordsFirestoreRepoImpl
+import com.example.associationwords.utils.Android.AndroidResourceManager
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -26,4 +27,8 @@ val repositorySingleton = module {
 val apiModule = module {
     factory { WordsApiFactory.wordsApi }
     factory { ResponseHandler() }
+}
+
+val androidModule = module {
+    single { AndroidResourceManager(get()) }
 }

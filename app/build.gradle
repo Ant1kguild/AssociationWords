@@ -41,6 +41,18 @@ android {
         enabled true
     }
 
+    Properties my_properties = new Properties()
+    def propertiesFile = project.rootProject.file('local.properties')
+    if (propertiesFile.exists()) {
+        my_properties.load(propertiesFile.newDataInputStream())
+        defaultConfig {
+            buildConfigField('String', 'WORDS_API_KEY', "\"${my_properties.getProperty('word.api.key')}\"")
+        }
+    }
+
+
+
+
 }
 
 dependencies {

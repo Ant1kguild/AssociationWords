@@ -1,7 +1,6 @@
 package com.example.associationwords.di
 
 import com.example.associationwords.api.ResponseHandler
-import com.example.associationwords.api.WordsApi
 import com.example.associationwords.api.WordsApiFactory
 import com.example.associationwords.data.WordsApiRepo
 import com.example.associationwords.data.WordsApiRepoImpl
@@ -10,7 +9,7 @@ import com.example.needmoreassociations.data.UserFirestoreRepo
 import com.example.needmoreassociations.data.UserFirestoreRepoRepoImpl
 import com.example.associationwords.data.WordsFirestoreRepo
 import com.example.associationwords.data.WordsFirestoreRepoImpl
-import com.example.associationwords.ui.мocabulary.VocabularyViewModel
+import com.example.associationwords.ui.vocabulary.VocabularyViewModel
 import com.example.associationwords.utils.Android.AndroidResourceManager
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel

@@ -1,10 +1,8 @@
-package com.example.associationwords.ui.мocabulary
+package com.example.associationwords.ui.vocabulary
 
-import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.associationwords.R
 import com.example.associationwords.databinding.RecyclerViewItemBinding

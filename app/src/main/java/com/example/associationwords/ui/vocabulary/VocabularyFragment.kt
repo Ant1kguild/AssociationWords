@@ -1,4 +1,4 @@
-package com.example.associationwords.ui.мocabulary
+package com.example.associationwords.ui.vocabulary
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import com.example.associationwords.R
 import com.example.associationwords.databinding.FragmentMyVocabularyBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel

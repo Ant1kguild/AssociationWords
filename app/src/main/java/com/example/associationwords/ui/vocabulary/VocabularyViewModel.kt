@@ -1,4 +1,4 @@
-package com.example.associationwords.ui.мocabulary
+package com.example.associationwords.ui.vocabulary
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

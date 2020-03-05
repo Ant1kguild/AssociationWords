@@ -10,6 +10,7 @@ import com.example.needmoreassociations.data.UserFirestoreRepo
 import com.example.needmoreassociations.data.UserFirestoreRepoRepoImpl
 import com.example.associationwords.data.WordsFirestoreRepo
 import com.example.associationwords.data.WordsFirestoreRepoImpl
+import com.example.associationwords.ui.мocabulary.VocabularyViewModel
 import com.example.associationwords.utils.Android.AndroidResourceManager
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -17,6 +18,7 @@ import org.koin.dsl.module
 
 var viewModelsModule = module {
     viewModel { SharedViewModel(get(), get(), get()) }
+    viewModel { VocabularyViewModel() }
 }
 
 val repositorySingleton = module {

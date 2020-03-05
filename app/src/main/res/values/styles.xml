@@ -6,6 +6,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">true</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -16,5 +19,35 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <style name="TextViewMain" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">#473E6A</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:maxLines">2</item>
+        <item name="fontFamily">@font/noto_sans</item>
+    </style>
+
+
+    <style name="TextMainRV" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#ED7649</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">45</item>
+        <item name="android:fontFamily">@font/noto_sans</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+    </style>
 
 </resources>

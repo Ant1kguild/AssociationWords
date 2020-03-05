@@ -14,4 +14,10 @@
 
     <string name="home_second">Home Second</string>
     <string name="settings">Settings</string>
+    <string name="association">Association</string>
+    <string name="words">Words</string>
+    <string name="my_vocabulary">My vocabulary</string>
+    <string name="learn_new_word">Learn new word</string>
+
+    <string name="test_text">TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST</string>
 </resources>
